@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <h1>Születési anyakönyvezés</h1>
+    <div id="app">
+      <form id="personForm">
+        <div>
+          <label for="Name">Név</label>
+          <input type="text" id="Name" required>
+        </div>
+        <div>
+          <label for="Birthdate">Születési idő</label>
+          <input type="datetime-local" id="Birthdate" required>
+        </div>
+        <div>
+          <label for="Birthplace">Születési hely</label>
+          <input type="text" id="Birthplace" required>
+        </div>
+        <div>
+          <label for="IdCardNumber">Személyi igazolvány szám</label>
+          <input type="number" id="IdCardNumber" required>
+        </div>
+        <button type="submit">Felvétel</button>
+        <button type="reset">Begépelt adatok törlése</button>
+
+      </form>
+
+      <table id="personTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Név</th>
+            <th>Születési idő</th>
+            <th>Születési hely</th>
+            <th>Személyi igazolvány szám</th>
+            <th>Törlés</th>
+            <th>Módosítás</th>
+          </tr>
+        </thead>
+        <tbody id="peopleTable">
+
+        </tbody>
+
+      </table>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
