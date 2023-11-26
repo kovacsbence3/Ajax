@@ -12,15 +12,15 @@ document.addEventListener("DOMContentLoaded", ()=> {
     let html = "";
   responseBody.forEach(person => {
 
-    const actionsTableData = document.createElement("td")
-    const deleteButton = document.createElement("button")
-    const modifyButton = document.createElement("button")
-    deleteButton.textContent = "Törlés";
-    modifyButton.textContent = "Szerkesztés";
-    deleteButton.addEventListener("click", () => deletePerson(person.id))
-    deleteButton.addEventListener("click", () => modifyPerson(person.id))
-    actionsTableData.appendChild(deleteButton)
-    actionsTableData.appendChild(modifyButton)
+    // const actionsTableData = document.createElement("td")
+    // const deleteButton = document.createElement("button")
+    // const modifyButton = document.createElement("button")
+    // deleteButton.textContent = "Törlés";
+    // modifyButton.textContent = "Szerkesztés";
+    // deleteButton.addEventListener("click", () => deletePerson(person.id))
+    // deleteButton.addEventListener("click", () => modifyPerson(person.id))
+    // actionsTableData.appendChild(deleteButton)
+    // actionsTableData.appendChild(modifyButton)
 
     const tableRow = `<tr>
     <td>${person.id}</td>
@@ -28,8 +28,8 @@ document.addEventListener("DOMContentLoaded", ()=> {
     <td>${person.Birthdate}</td>
     <td>${person.Birthplace}</td>
     <td>${person.IdCardNumber}</td>
-    <td>${deleteButton}</td>
-    <td>${modifyButton}</td>
+    <td><button onClick="deletePerson(${person.id})">Törlés</button></td>
+    <td><button onClick="modifyPerson(${person.id})">Szerkesztés</button></td>
     </tr>`;
 
     html += tableRow;
@@ -82,7 +82,9 @@ function resetForm(){
 
 async function deletePerson(id){
   const response = await fetch(`${api_url}/${id}`, {method: "DELETE"})
+  window.location.reload()
 }
 async function modifyPerson(id){
   const response = await fetch(`${api_url}/${id}`, {method: "UPDATE"})
+  window.location.reload()
 }
