@@ -5,21 +5,33 @@ document.addEventListener("DOMContentLoaded", ()=> {
   const personForm = document.getElementById("personForm");
   const personTable = document.getElementById("personTable")
   personForm.addEventListener("submit", newPerson)
-  personTable.addEventListener("submit", deletePerson(person.id))
+//  personTable.addEventListener("delete", deletePerson(person.id))
 //  personTable.addEventListener("modify", modifyPerson(person.id))
   fetch(api_url).then(httpResponse => httpResponse.json())
   .then(responseBody => {
     let html = "";
   responseBody.forEach(person => {
+
+    const actionsTableData = document.createElement("td")
+    const deleteButton = document.createElement("button")
+    const modifyButton = document.createElement("button")
+    deleteButton.textContent = "Törlés";
+    modifyButton.textContent = "Szerkesztés";
+    deleteButton.addEventListener("click", () => deletePerson(person.id))
+    deleteButton.addEventListener("click", () => modifyPerson(person.id))
+    actionsTableData.appendChild(deleteButton)
+    actionsTableData.appendChild(modifyButton)
+
     const tableRow = `<tr>
     <td>${person.id}</td>
     <td>${person.Name}</td>
     <td>${person.Birthdate}</td>
     <td>${person.Birthplace}</td>
     <td>${person.IdCardNumber}</td>
-    <td><button type="delete">Törlés</button></td>
-    <td><button type="modify">Módosítás</button></td>
+    <td>${deleteButton}</td>
+    <td>${modifyButton}</td>
     </tr>`;
+
     html += tableRow;
   });
   peopleTable.innerHTML = html;
@@ -49,11 +61,11 @@ async function newPerson(event){
     window.location.reload()
   }
 
-  async function deletePerson(id){
-    const response = await fetch(`${api_url}/${id}`, {method: "DELETE"});
+  // async function deletePerson(id){
+  //   const response = await fetch(`${api_url}/${id}`, {method: "DELETE"});
 
 
-  }
+  // }
   // async function modifyPerson(id){
   //   const response = await fetch(api_url);
     
@@ -68,3 +80,9 @@ function resetForm(){
 }
 
 
+async function deletePerson(id){
+  const response = await fetch(`${api_url}/${id}`, {method: "DELETE"})
+}
+async function modifyPerson(id){
+  const response = await fetch(`${api_url}/${id}`, {method: "UPDATE"})
+}
